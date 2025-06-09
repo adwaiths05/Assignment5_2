@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .form-container { width: 300px; margin: 20px; }
+        label { display: block; margin: 10px 0 5px; }
+        input { width: 100%; padding: 5px; }
+        button { margin: 10px 0; padding: 5px 10px; }
+        table { border-collapse: collapse; width: 50%; margin: 20px; }
+        th, td { border: 1px solid black; padding: 5px; text-align: left; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>student registration form</h2>
+        <form id="studentForm" onsubmit="return validateForm(event)">
+            <label>Name of student</label>
+            <input type="text" id="name" required>
+            
+            <label>Mobile no</label>
+            <input type="text" id="mobile" required>
+            
+            <label>Address lane</label>
+            <input type="text" id="address" >
+            
+            <label>city</label>
+            <input type="text" id="city" >
+            
+            <label>state</label>
+            <input type="text" id="state" >
+            
+            <label>Pincode</label>
+            <input type="text" id="pincode" >
+            
+            <button type="submit">SUBMIT</button>
+            <button type="reset">RESET</button>
+        </form>
+    </div>
+
+    <table id="studentTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>student name</th>
+                <th>mobile no</th>
+                <th>state</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            
+            let name = document.getElementById("name").value;
+            let mobile = document.getElementById("mobile").value;
+            let address = document.getElementById("address").value;
+            let city = document.getElementById("city").value;
+            let state = document.getElementById("state").value;
+            let pincode = document.getElementById("pincode").value;
+
+    // Check for null values
+            if (!name || !mobile || !address || !city || !state || !pincode) {
+                alert("all fields must not be empty!");
+                return false;
+            }
+
+            if (!/^[a-zA-Z\s]+$/.test(name)) {
+                alert("Name needed with only alphabets");
+                return false;
+            }
+
+            if (!/^\d{10}$/.test(mobile)) {
+                alert("please enter mobile number with 10 digits!");
+                return false;
+            }
+
+            if (!/^\d{6}$/.test(pincode)) {
+                alert("6 digit pincode!");
+                return false;
+            }
+// Display data
+            let table = document.getElementById("studentTable");
+            let tbody = document.getElementById("tableBody");
+            table.style.display = "table";
+            
+            let row = `<tr>
+                <td>${name}</td>
+                <td>${mobile}</td>
+                <td>${state}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+
+            // Reset form
+            document.getElementById("studentForm").reset();
+            return false;
+        }
+    </script>
+</body>
+</html>

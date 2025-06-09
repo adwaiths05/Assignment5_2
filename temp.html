@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Categorizer</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+    input, button { margin: 10px; padding: 5px; }
+    #result { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Temperature Categorizer</h1>
+  <input type="number" id="tempInput" placeholder="Enter temperature (°C)">
+  <button onclick="categorizeTemp()">Categorize</button>
+  <div id="result"></div>
+  <script>
+    function categorizeTemp() {
+      let temp = Number(document.getElementById("tempInput").value);
+      let category;
+      if (temp < 0) category = "Freezing";
+      else if (temp <= 15) category = "Cold";
+      else if (temp <= 30) category = "Moderate";
+      else category = "Hot";
+      console.log(`Temperature ${temp}°C is ${category}`);
+      document.getElementById("result").innerText = `Temperature ${temp}°C is ${category}`;
+      alert(`Temperature ${temp}°C is ${category}`);
+    }
+  </script>
+</body>
+</html>
